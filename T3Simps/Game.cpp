@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Game.h"
+#include <Windows.h>
 
 using namespace std;
 
@@ -26,7 +27,9 @@ void Game::play(){
 			{
 				cout << "\nYou chose Rock";
 				player.setplayerselection(1);
-				computer.getcomputerselection();
+
+				chooseWinner(player.getplayerselection(),computer.getcomputerselection());
+				printscore();
 				break;
 			}
 			case (2):
@@ -34,14 +37,16 @@ void Game::play(){
 
 				cout << "\nYou chose Paper";
 				player.setplayerselection(2);
-				computer.getcomputerselection();
+				chooseWinner(player.getplayerselection(),computer.getcomputerselection());
+				printscore();
 				break;
 			}
 			case (3):
 			{
 				cout << "\nYou chose Scissors";
 				player.setplayerselection(3);
-				computer.getcomputerselection();
+				chooseWinner(player.getplayerselection(),computer.getcomputerselection());
+				printscore();
 				break;
 			}
 			case 0:
@@ -49,6 +54,12 @@ void Game::play(){
 				cout << "\nThanks for playing!";
 				break;
 			}
+			default:
+			{
+				cout <<"\nERROR:Invalid input\n";
+				Sleep(2000);
+			}
+
 		}
 	}
 
@@ -65,8 +76,8 @@ unsigned int Game::get_cScore(){
 }
 
 void Game::printscore(){
-	cout << "Player score: " << pScore << endl;
-	cout << "Computer score: " << cScore << endl;	
+	cout << "Player score: " << get_pScore() << endl;
+	cout << "Computer score: " << get_cScore() << endl;	
 }
 
 void Game::reset(){
@@ -76,6 +87,30 @@ void Game::reset(){
 }
 
 bool Game::chooseWinner(int pChoice, int cChoice){
-	if(pChoice)
+	if(pChoice == 2 && cChoice == 1){// Paper beats Rock
+		cout << "\nComputer chose Rock. You win!\n";
+		pScore++;
+		return true;
+	} 
+	else if(pChoice == 3 && cChoice == 2){ // Scissors beats paper 
+		cout << "\nComputer chose Paper. You win!\n";
+		pScore++;
+		return true;
+	}
+	else if(pChoice == 1 && cChoice == 3){ // Rock beats scissors
+		cout << "\nComputer chose Scissors. You win!\n";
+		pScore++;
+		return true;
+	}
+	else if(pChoice == cChoice) // Tie
+	{
+		cout << "\nIt was a tie!\n";
+		return false;
+	}
+	else{ // computer beats you
+		cout << "\nComputer beat you. You lose!\n";
+		cScore ++; 
+		return false;
+	}
 }
 
