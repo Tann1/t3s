@@ -10,6 +10,7 @@ enum choice_e {
 	rock=1,
 	paper,
 	scissors,
+	_exit,
 	invalid
 };
 

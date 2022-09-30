@@ -8,7 +8,7 @@ std::ostream& operator<<(std::ostream& os, const player& p)
 
 	switch(p_type) {
 		case human_p:
-			p_type_str = "human";
+			p_type_str = "your";
 			break;
 		case computer_p:
 			p_type_str = "computer";

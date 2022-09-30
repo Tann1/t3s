@@ -1,14 +1,14 @@
 #include <iostream>
 
-#include "player.h"
-#include "computer.h"
+#include "game.h"
 
+#define ROUNDS 20
 
 int main() {
 	
-	player *p1 = new computer(); 
-	p1->make_choice();
-	std::cout << *p1 << " made choice: " << p1->get_choice() << std::endl;
-	delete p1;
+	game_rps *game = new game_rps(ROUNDS);
+	game->play_rps();
+
+	delete game;
 	return 0;
 }

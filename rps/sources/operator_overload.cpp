@@ -15,6 +15,9 @@ std::ostream& operator<<(std::ostream& os, const choice_e &ch)
 		case scissors:
 			choice = "scissors";
 			break;
+		case _exit:
+			choice = "exit";
+			break;
 		default:
 			choice = "invalid";
 	}
@@ -28,6 +31,8 @@ std::istream& operator>>(std::istream& in, choice_e &ch)
 	unsigned int c;
 	in >> c;
 	ch = static_cast<choice_e>(c);
+	if (!(ch >= rock && ch <= choice_e::_exit))
+		ch = invalid;
 
 	return in;
 }

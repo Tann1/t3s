@@ -9,6 +9,7 @@
 
 class human : public player {
 	public:
+		human() : player(p_type_e::human_p) {}
 		choice_e make_choice();
 		choice_e get_choice();
 };
