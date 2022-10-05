@@ -43,6 +43,8 @@ class computer_ml : public computer {
 	
 		std::string get_str_val(choice_e ch);
 		bool check_permutation_exists(std::string c_seq);
+		choice_e determine_choice(std::string seq);
+		choice_e get_best_choice(std::string seq_r, std::string seq_p, std::string seq_s);
 		
 };
 
