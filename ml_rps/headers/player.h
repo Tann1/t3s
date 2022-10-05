@@ -11,6 +11,7 @@ class player {
 	public:
 		player(){this->choice = choice_e::invalid;}
 		player(p_type_e p_t) : p_type(p_t) {player();}
+		virtual ~player() {}
 
 		virtual choice_e make_choice() {return choice_e::invalid;}
 		choice_e get_choice() {return this->choice;}
