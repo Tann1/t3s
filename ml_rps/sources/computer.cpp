@@ -17,7 +17,6 @@ computer_ml::computer_ml() : N(DEFAULT_N)
 {
 	std::string permutation;
 	int frequency;
-	std::unordered_map<std::string, int>::iterator itr;
 
 	data_file.open(default_file, std::ios::in | std::ios::out);
 
@@ -29,10 +28,8 @@ computer_ml::computer_ml() : N(DEFAULT_N)
 	}
 	data_file.clear();
 
-	for (itr = permutation_frequency.begin(); itr != permutation_frequency.end(); itr++)
-		std::cout << itr->first << " " << itr->second << std::endl;
-
-		
+	this->curr_sequence = ""; 
+	this->opp_choice == choice_e::invalid;
 }
 
 computer_ml::computer_ml(int n)
@@ -50,4 +47,54 @@ computer_ml::~computer_ml()
 		data_file << itr->first << " " << itr->second << std::endl;
 
 	data_file.close();
+}
+
+
+void computer_ml::store_opponent_choice(player *p)
+{
+	this->opp_choice = p->get_choice();
+}
+
+
+choice_e computer_ml::make_choice()
+{
+	bool exist = false;
+
+	if (this->curr_sequence.size() < this->N  || this->opp_choice == invalid) {
+		if (this->opp_choice != invalid) {
+			this->curr_sequence += get_str_val(this->opp_choice);
+			if (this->curr_sequence.size() % this->N != 0)
+				this->curr_sequence += get_str_val(rock);
+		}
+		this->choice = rock;
+		return rock; // default value while our ml algo learns
+	}
+	std::cout << this->curr_sequence << std::endl;	
+	exist = check_permutation_exists(this->curr_sequence);	
+	if (exist == false)
+		this->permutation_frequency[this->curr_sequence] = 0; // make an entry
+	
+	this->choice = paper;
+	return paper;	
+}
+
+
+/* private methods */
+
+std::string computer_ml::get_str_val(choice_e ch)
+{
+	if (ch == rock)
+		return "R";
+	if (ch == paper)
+		return "P";
+	if (ch == scissors)
+		return "S";
+	return "I"; // invalid
+}
+
+bool computer_ml::check_permutation_exists(std::string c_seq)
+{
+	if (this->permutation_frequency.find(c_seq) == this->permutation_frequency.end())
+		return false;	
+	return true;
 }

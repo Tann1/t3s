@@ -32,12 +32,17 @@ class computer_ml : public computer {
 		computer_ml(int n);
 		~computer_ml();
 		void store_opponent_choice(player *p);
-		choice_e make_choice() {return rock;}
+		choice_e make_choice();
 
 	private:
 		int N;
 		std::fstream data_file;
 		std::unordered_map<std::string, int> permutation_frequency;
+		std::string curr_sequence; 
+		choice_e opp_choice;
+	
+		std::string get_str_val(choice_e ch);
+		bool check_permutation_exists(std::string c_seq);
 		
 };
 

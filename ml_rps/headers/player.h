@@ -14,6 +14,7 @@ class player {
 		virtual ~player() {}
 
 		virtual choice_e make_choice() {return choice_e::invalid;}
+		virtual void store_opponent_choice(player *p) {}
 		choice_e get_choice() {return this->choice;}
 		
 		friend std::ostream& operator<<(std::ostream& os, const player& p);

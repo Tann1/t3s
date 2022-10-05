@@ -1,10 +1,22 @@
 #include "game.h"
 
 
-game_rps::game_rps(unsigned int rounds) : rounds(rounds) 
+game_rps::game_rps(unsigned int rounds) : rounds(rounds) , mode('r') 
 {
 	p1 = new human();
 	p2 = new computer_random();
+}
+
+game_rps::game_rps(unsigned int rounds, char comp_type) : rounds(rounds)
+{
+	p1 = new human();
+	if (tolower(comp_type) == 'm') {
+		p2 = new computer_ml();
+		this->mode = 'm';	
+	}
+	else {
+		p2 = new computer_random();
+	}
 }
 
 game_rps::~game_rps()
@@ -63,6 +75,8 @@ void game_rps::play_rps()
 		p1->make_choice();
 		if (p1->get_choice() == choice_e::_exit)
 			break;
+		if (tolower(this->mode) == 'm')
+			p2->store_opponent_choice(p1);
 		p2->make_choice();
 		std::cout << *p1 << " choice made: " << p1->get_choice() << std::endl;
 		std::cout << *p2 << " choice made: " << p2->get_choice() << std::endl;
