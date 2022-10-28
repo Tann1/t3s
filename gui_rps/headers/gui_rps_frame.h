@@ -6,6 +6,7 @@
 #include "rps_button_panel.h"
 #include "rps_round_panel.h"
 #include "rps_computer_panel.h"
+#include "rps_stats_panel.h"
 
 enum
 {
@@ -31,6 +32,7 @@ class gui_rps_frame : public wxFrame
 		rps_round_panel *round_panel;
 		rps_button_panel *rps_panel;
 		rps_computer_panel *computer_panel;	
+		rps_stats_panel *stats_panel;
 
 		void init();
 		void init_sizer();

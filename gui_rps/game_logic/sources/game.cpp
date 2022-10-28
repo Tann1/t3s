@@ -58,7 +58,7 @@ int game_rps::determine_winner()
 
 unsigned int game_rps::get_human_wins()
 {
-	return (curr_round + 1) - get_ties() - get_computer_wins();
+	return curr_round  - get_ties() - get_computer_wins();
 }
 
 unsigned int game_rps::get_computer_wins()

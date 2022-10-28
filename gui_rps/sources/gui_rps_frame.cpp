@@ -18,6 +18,7 @@ gui_rps_frame::gui_rps_frame(const wxString& title) : wxFrame(NULL, wxID_ANY, ti
 	round_panel = new rps_round_panel(this);
 	rps_panel = new rps_button_panel(this);
 	computer_panel = new rps_computer_panel(this);
+	stats_panel = new rps_stats_panel(this);
 	init();
 }
 
@@ -40,6 +41,8 @@ void gui_rps_frame::init_sizer()
 	frame_sizer->Add(rps_panel, 0, wxALIGN_CENTER, 0);
 	frame_sizer->AddSpacer(20);
 	frame_sizer->Add(computer_panel, 0, wxALIGN_CENTER, 0);
+	frame_sizer->AddSpacer(20);
+	frame_sizer->Add(stats_panel, 0, wxALIGN_CENTER, 0);
 	frame_sizer->AddSpacer(40);
 
 	SetSizerAndFit(frame_sizer);
@@ -119,4 +122,5 @@ void gui_rps_frame::update()
 {
 	round_panel->update();
 	computer_panel->update();
+	stats_panel->update();
 }
