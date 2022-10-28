@@ -4,6 +4,7 @@
 #include <wx/wx.h>
 
 #include "rps_button_panel.h"
+#include "rps_round_panel.h"
 
 enum
 {
@@ -20,7 +21,13 @@ class gui_rps_frame : public wxFrame
 	
 		void on_exit(wxCommandEvent& e);
 		void on_about(wxCommandEvent& e);
+		void on_rock(wxCommandEvent& e);
+		void on_paper(wxCommandEvent& e);
+		void on_scissors(wxCommandEvent& e);
+
+		void update();
 	private:
+		rps_round_panel *round_panel;
 		rps_button_panel *rps_panel;
 		void init();
 		void init_sizer();

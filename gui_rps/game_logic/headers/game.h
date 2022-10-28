@@ -20,10 +20,11 @@ class game_rps {
 		player *get_human_player() {return p1;}
 		player *get_computer_player() {return p2;}
 		unsigned int get_rounds() {return rounds;}
+		unsigned int get_curr_round() {return curr_round;}
 		int determine_winner(); 
 
 	private:
-		unsigned int rounds;
+		unsigned int rounds, curr_round;
 		player *p1, *p2;
 		char mode;
 

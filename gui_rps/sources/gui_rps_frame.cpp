@@ -7,11 +7,15 @@ using namespace std;
 wxBEGIN_EVENT_TABLE(gui_rps_frame, wxFrame)
 	EVT_MENU(wxID_ABOUT, gui_rps_frame::on_about)
 	EVT_MENU(wxID_EXIT, gui_rps_frame::on_exit)
+	EVT_BUTTON(id_rock, gui_rps_frame::on_rock)
+	EVT_BUTTON(id_paper, gui_rps_frame::on_paper)
+	EVT_BUTTON(id_scissors, gui_rps_frame::on_scissors)
 wxEND_EVENT_TABLE()
 
 
 gui_rps_frame::gui_rps_frame(const wxString& title) : wxFrame(NULL, wxID_ANY, title)
 {
+	round_panel = new rps_round_panel(this);
 	rps_panel = new rps_button_panel(this);
 	init();
 }
@@ -20,7 +24,6 @@ void gui_rps_frame::init()
 {
 	init_menu_bar();
 	init_sizer();
-	std::cout << "frame constructor: " << game_logic->get_human_player()->get_choice() << std::endl;	
 	wxSize size = GetBestSize();
 	SetMinClientSize(size);
 }
@@ -30,6 +33,8 @@ void gui_rps_frame::init_sizer()
 {
 	wxSizer *frame_sizer = new wxBoxSizer(wxVERTICAL);
 
+	frame_sizer->AddSpacer(20);
+	frame_sizer->Add(round_panel, 0, wxALIGN_CENTER, 0);
 	frame_sizer->AddSpacer(20);
 	frame_sizer->Add(rps_panel, 0, wxALIGN_CENTER, 0);
 
@@ -64,4 +69,49 @@ void gui_rps_frame::on_about(wxCommandEvent& WXUNUSED(e))
 void gui_rps_frame::on_exit(wxCommandEvent& WXUNUSED(e))
 {
 	Close(true);
+}
+
+void gui_rps_frame::on_rock(wxCommandEvent& WXUNUSED(e))
+{
+	player* human = game_logic->get_human_player();
+	player *computer = game_logic->get_computer_player();
+	
+	human->set_choice(choice_e::rock);
+	rps_panel->update_button_choice_text("rock");
+	
+	computer->store_opponent_choice(human);
+	computer->make_choice();
+	game_logic->determine_winner();
+	update();
+}
+void gui_rps_frame::on_paper(wxCommandEvent& WXUNUSED(e))
+{
+	player* human = game_logic->get_human_player();
+	player *computer = game_logic->get_computer_player();
+	
+	human->set_choice(choice_e::paper);
+	rps_panel->update_button_choice_text("paper");
+	
+	computer->store_opponent_choice(human);
+	computer->make_choice();
+	game_logic->determine_winner();
+	update();
+}
+void gui_rps_frame::on_scissors(wxCommandEvent& WXUNUSED(e))
+{
+	player* human = game_logic->get_human_player();
+	player *computer = game_logic->get_computer_player();
+	
+	human->set_choice(choice_e::scissors);
+	rps_panel->update_button_choice_text("scissors");
+	
+	computer->store_opponent_choice(human);
+	computer->make_choice();
+	game_logic->determine_winner();
+	update();
+}
+
+void gui_rps_frame::update()
+{
+	round_panel->update();
 }
