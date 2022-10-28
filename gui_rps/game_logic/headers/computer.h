@@ -33,6 +33,7 @@ class computer_ml : public computer {
 		~computer_ml();
 		void store_opponent_choice(player *p);
 		choice_e make_choice();
+		std::string get_prediction();
 
 	private:
 		int N;
@@ -40,11 +41,13 @@ class computer_ml : public computer {
 		std::unordered_map<std::string, int> permutation_frequency;
 		std::string curr_sequence; 
 		choice_e opp_choice;
+		choice_e prediction; 
 	
 		std::string get_str_val(choice_e ch);
 		bool check_permutation_exists(std::string c_seq);
 		choice_e determine_choice(std::string seq);
 		choice_e get_best_choice(std::string seq_r, std::string seq_p, std::string seq_s);
+		void set_prediction(choice_e best_choice);
 		
 };
 

@@ -17,11 +17,11 @@ void rps_button_panel::init()
 
 	/* arrange the layout */
 	button_sizer->Add(choose_text, 0, 0, 0);
-	button_sizer->AddSpacer(5);
+	button_sizer->AddSpacer(15);
 	button_sizer->Add(rock_button, 0, 0, 0);
-	button_sizer->AddSpacer(5);
+	button_sizer->AddSpacer(15);
 	button_sizer->Add(paper_button, 0, 0, 0);
-	button_sizer->AddSpacer(5);
+	button_sizer->AddSpacer(15);
 	button_sizer->Add(scissors_button, 0, 0, 0);
 
 	button_panel->SetSizer(button_sizer);

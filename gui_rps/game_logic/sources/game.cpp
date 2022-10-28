@@ -5,7 +5,9 @@ game_rps::game_rps(unsigned int rounds) : rounds(rounds) , mode('r')
 {
 	p1 = new human();
 	p2 = new computer_random();
-	curr_round = 1; 
+	curr_round = 0;
+	computer_wins = 0; 
+	ties = 0;
 }
 
 game_rps::game_rps(unsigned int rounds, char comp_type) : rounds(rounds)
@@ -39,15 +41,34 @@ int game_rps::determine_winner()
 	choice_e p1_choice = p1->get_choice();
 	choice_e p2_choice = p2->get_choice();
 	curr_round++;
-	if (p1_choice == p2_choice)
+	if (p1_choice == p2_choice){
+		ties++;
 		return 0;
+	}
 	if (p1_choice == rock && p2_choice == scissors)
 		return 1;
 	if (p1_choice == paper && p2_choice == rock)
 		return 1;
 	if (p1_choice == scissors && p2_choice == paper)
 		return 1;
+
+	computer_wins++;
 	return -1; 
+}
+
+unsigned int game_rps::get_human_wins()
+{
+	return (curr_round + 1) - get_ties() - get_computer_wins();
+}
+
+unsigned int game_rps::get_computer_wins()
+{
+	return computer_wins;
+}
+
+unsigned int game_rps::get_ties()
+{
+	return ties;
 }
 
 void game_rps::print_winner()

@@ -88,6 +88,17 @@ choice_e computer_ml::make_choice()
 	return ch;	
 }
 
+std::string computer_ml::get_prediction()
+{
+	if (prediction == rock)
+		return "rock";
+	if (prediction == paper)
+		return "paper";
+	if (prediction == scissors)
+		return "scissors";
+
+	return "determining . . .";
+}
 
 /* private methods */
 
@@ -113,6 +124,7 @@ choice_e computer_ml::determine_choice(std::string seq)
 {
 	std::string seq_r = seq + "R", seq_p = seq + "P", seq_s = seq + "S";
 	int freq_r = 0, freq_p = 0, freq_s = 0;
+	choice_e made_choice; 
 	
 	if (!check_permutation_exists(seq_r))
 		this->permutation_frequency[seq_r] = 0;
@@ -120,7 +132,10 @@ choice_e computer_ml::determine_choice(std::string seq)
 		this->permutation_frequency[seq_p] = 0;
 	if (!check_permutation_exists(seq_s))
 		this->permutation_frequency[seq_s] = 0;
-	return get_best_choice(seq_r, seq_p, seq_s);
+	made_choice = get_best_choice(seq_r, seq_p, seq_s);
+	set_prediction(made_choice);
+	
+	return made_choice;
 	
 }
 
@@ -133,4 +148,14 @@ choice_e computer_ml::get_best_choice(std::string seq_r, std::string seq_p, std:
 	if (this->permutation_frequency[seq_s] > this->permutation_frequency[seq_r] && this->permutation_frequency[seq_s] > this->permutation_frequency[seq_p])
 		return rock;
 	return rock;
+}
+
+void computer_ml::set_prediction(choice_e best_choice)
+{
+	if (best_choice == paper)
+		this->prediction = rock;
+	if (best_choice == rock)
+		this->prediction = scissors;
+	if (best_choice == scissors)
+		this->prediction = paper;
 }
