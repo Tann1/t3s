@@ -22,7 +22,6 @@ class gui_rps_frame : public wxFrame
 		void on_about(wxCommandEvent& e);
 	private:
 		rps_button_panel *rps_panel;
-	
 		void init();
 		void init_sizer();
 		void init_menu_bar();

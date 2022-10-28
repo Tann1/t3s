@@ -20,7 +20,7 @@ void gui_rps_frame::init()
 {
 	init_menu_bar();
 	init_sizer();
-		
+	std::cout << "frame constructor: " << game_logic->get_human_player()->get_choice() << std::endl;	
 	wxSize size = GetBestSize();
 	SetMinClientSize(size);
 }

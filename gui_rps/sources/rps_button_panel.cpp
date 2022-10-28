@@ -1,4 +1,5 @@
 #include "rps_button_panel.h"
+#include <string>
 
 void rps_button_panel::init()
 {
@@ -53,17 +54,45 @@ void rps_button_panel::init()
 
 void rps_button_panel::on_rock(wxCommandEvent& e)
 {
-	update_button_choice_text(wxString("rock"));
+	std::string r = "rock";
+	update_button_choice_text(wxString(r));
+
+	/* execute internal logic after player had made their choice */
+	game_logic->get_human_player()->set_choice(choice_e::rock);
+	game_logic->get_computer_player()->store_opponent_choice(game_logic->get_human_player());
+	game_logic->get_computer_player()->make_choice();
+	choice_e human = game_logic->get_human_player()->get_choice();
+	choice_e computer = game_logic->get_computer_player()->get_choice();
+	std::cout << game_logic->determine_winner() << human << computer << std::endl;
 }
 
 void rps_button_panel::on_paper(wxCommandEvent& e)
 {
-	update_button_choice_text(wxString("paper"));
+	std::string p = "paper";
+	update_button_choice_text(wxString(p));
+
+	/* execute internal logic after player had made their choice */
+	game_logic->get_human_player()->set_choice(choice_e::paper);
+	game_logic->get_computer_player()->store_opponent_choice(game_logic->get_human_player());
+	game_logic->get_computer_player()->make_choice();
+	choice_e human = game_logic->get_human_player()->get_choice();
+	choice_e computer = game_logic->get_computer_player()->get_choice();
+	std::cout << game_logic->determine_winner() << human << computer << std::endl;
 }
+
 
 void rps_button_panel::on_scissors(wxCommandEvent& e)
 {
-	update_button_choice_text(wxString("scissors"));
+	std::string s = "scissors";
+	update_button_choice_text(wxString(s));
+
+	/* execute internal logic after player had made their choice */
+	game_logic->get_human_player()->set_choice(choice_e::scissors);
+	game_logic->get_computer_player()->store_opponent_choice(game_logic->get_human_player());
+	game_logic->get_computer_player()->make_choice();
+	choice_e human = game_logic->get_human_player()->get_choice();
+	choice_e computer = game_logic->get_computer_player()->get_choice();
+	std::cout << game_logic->determine_winner() << human << computer << std::endl;
 }
 
 void rps_button_panel::update_button_choice_text(const wxString &choice)

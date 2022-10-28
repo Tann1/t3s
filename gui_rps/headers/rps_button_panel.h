@@ -2,6 +2,7 @@
 #define RPS_BUTTON_PANEL__H
 
 #include <wx/wx.h>
+#include "game_logic.h"
 
 class rps_button_panel : public wxPanel
 {
