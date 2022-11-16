@@ -99,15 +99,20 @@ def create_inventory(cur):
     except:
         print("Failed to create iventory table.")
 
+        
 def create_recipe(cur):
     try:
         cur.execute("""CREATE TABLE recipe (
             r_id    integer not null auto_increment,
-            r_etype varchar(255) not null,
-            r_nutri varchar(255) not null,
+            r_name varchar(255) not null,
             r_desc  varchar(255) not null,
+            r_nutri varchar(255) not null,
+            r_etype varchar(255) not null,
+            r_price integer not null, 
             m_id    integer not null,
+         
             primary key (r_id),
+#UNIQUE KEY `r_name_UNIQUE` (`r_name`)  
             foreign key (m_id) references manager(m_id)
         )
         """)
