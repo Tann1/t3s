@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import res, sys
+import res_login, sys
 import mysql.connector
 
 
@@ -221,7 +221,7 @@ class Ui_Form(object):
         self.label.mousePressEvent = self.on_click_signup
 
     def on_click_signup(self, eve):
-        #Form.hide()
+        pass#Form.hide()
 
     def on_click_login(self):
         global userLOGIN
