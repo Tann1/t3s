@@ -179,6 +179,8 @@ def create_order_list(cur):
         print("Failed to create order list table.")
 
 def init_db(db):
+
+    print("initializing database . . .")
     cursor = db.cursor()
     create_mvp_db(cursor)
     create_customer(cursor)
@@ -194,7 +196,13 @@ def init_db(db):
     create_order_list(cursor)
     cursor.close()
 
+    print("database initialization successful!")
+
 if __name__ == "__main__":
-    db = mysql.connector.connect(user=_user, password=_pass, host=_host)
+    _user = input("Enter db user: ")
+    _pass = input("Enter db pass: ")
+    _host = input("Enter db host: ")
+    db_name = input("Enter db name: ")
+    db = mysql.connector.connect(user=_user, password=_pass, host=_host, db=db_name)
     init_db(db)
     db.close()
