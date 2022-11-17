@@ -10,10 +10,10 @@ from ui_sources import login, signup
         
 
 class mvp_app():
-    def __init__(self):
+    def __init__(self, interactive_mode=True):
         
         # db property
-        self.db = db_commands(interactive=True)
+        self.db = db_commands(interactive=interactive_mode)
 
         # login ui 
         self.login_form = QtWidgets.QWidget()

@@ -203,6 +203,6 @@ if __name__ == "__main__":
     _pass = pwinput.pwinput("Enter db pass: ")
     _host = input("Enter db host: ")
     db_name = input("Enter db name: ")
-    db = mysql.connector.connect(user=_user, password=_pass, host=_host, db=db_name)
+    db = mysql.connector.connect(user=_user, password=_pass, host=_host)
     init_db(db)
     db.close()
