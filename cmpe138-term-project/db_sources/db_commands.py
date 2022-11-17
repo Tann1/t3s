@@ -1,5 +1,5 @@
 import mysql.connector
-import hashlib
+import hashlib, pwinput
 
 class db_commands():
     def __init__(self, _user = "root", _pass = "surewhynot1", _host = "localhost", db_name = "mvp_db", interactive = False):
@@ -9,7 +9,7 @@ class db_commands():
         self.db_name = db_name
         if (interactive):
             self._user = input("Enter db user: ")
-            self._pass = input("Enter db pass: ")
+            self._pass = pwinput.pwinput("Enter db pass: ")
             self._host = input("Enter db host: ")
             self._db_name = input("Enter db name: ")
         self.db = mysql.connector.connect(user=self._user, password=self._pass, host=self._host, database=self.db_name)

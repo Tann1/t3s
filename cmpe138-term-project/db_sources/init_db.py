@@ -1,4 +1,4 @@
-import mysql.connector
+import mysql.connector, pwinput 
 
 ## GLOBALS
 db_name = "mvp_db"
@@ -200,7 +200,7 @@ def init_db(db):
 
 if __name__ == "__main__":
     _user = input("Enter db user: ")
-    _pass = input("Enter db pass: ")
+    _pass = pwinput.pwinput("Enter db pass: ")
     _host = input("Enter db host: ")
     db_name = input("Enter db name: ")
     db = mysql.connector.connect(user=_user, password=_pass, host=_host, db=db_name)
