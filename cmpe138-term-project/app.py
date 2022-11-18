@@ -1,17 +1,15 @@
 
-import sys
+import sys,os
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 from db_sources.db_commands import db_commands
 from ui_sources import login, signup
 
-        
+from main import *        
 
         
 
 class mvp_app():
     def __init__(self, interactive_mode=True):
-        
         # db property
         self.db = db_commands(interactive=interactive_mode)
 
@@ -56,19 +54,24 @@ class mvp_app():
     def on_click_signup(self, e):
         self.signup_form.show()
         self.login_form.close()
-    
+
     def handle_login(self):
         c_uname = self.login_ui.lineEdit_User.text()
         c_pass = self.login_ui.lineEdit_Password.text()
         success = self.db.authenticate_login(c_uname, c_pass)
-
         if (success):
-            self.login_form.close()
-           # self.main_window.show() 
+            self.user = MainWindow()
+            os.system('python main.py')
+
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     mvp_app()
     sys.exit(app.exec_())
+    #sys.exit(app.exec_())
+
+
+    
     
     

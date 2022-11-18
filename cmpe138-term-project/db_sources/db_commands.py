@@ -2,7 +2,7 @@ import mysql.connector
 import hashlib, pwinput
 
 class db_commands():
-    def __init__(self, _user = "root", _pass = "surewhynot1", _host = "localhost", db_name = "mvp_db", interactive = False):
+    def __init__(self, _user = "root", _pass = "m::26~{QFuJZ", _host = "localhost", db_name = "mvp_db", interactive = False):
         self._user = _user
         self._pass = _pass
         self._host = _host
@@ -51,7 +51,7 @@ class db_commands():
             self.cursor.execute(select_stmt)
             return self.cursor.fetchall()
         except:
-            print("Failed to commit customer to database.")
+            print("Failed to retrieve customers from database.")
         return []
     
     def authenticate_login(self, c_uname, c_pass):
@@ -61,24 +61,80 @@ class db_commands():
         login_data = (c_uname, hashed_pass)
         try:
             self.cursor.execute(select_stmt, login_data)
-            self.cursor.fetchall()
+            user = self.cursor.fetchall()
             if (self.cursor.rowcount == 1):
                 print("login successful.")
-                return True
+                return user[0]
         except:
             pass
         print("Failed to login user.")
-        return False 
+        return ()
 
 
+    def add_recipe(self,r_name,r_desc,r_nutri,r_etype,r_price,m_id):
+        select_stmt = "INSERT INTO recipe(r_name,r_desc,r_nutri,r_etype,r_price,m_id) VALUES (%s,%s,%s,%s,%s,%s)"
+        recipe_data = (r_name,r_desc,r_nutri,r_etype,r_price,1)
+        try:
+            self.cursor.execute(select_stmt,(recipe_data))
+            self.db.commit() 
+            print ("recipe added successfully!")
+        except:
+            print("Failed to add recipe to database.")
 
-
-
-# if __name__ == "__main__":
-#     db = db_commands()
-#     db.insert_new_customer("tanishq", "gadkari", "tannn", "gadkaritanishq@gmail.com", "123", "1234 addr st. city, ST 12345")
+    def remove_recipe(self,r_name,r_id):
+        if r_name == "":
+            q1 = "DELETE FROM recipe WHERE r_id = %s"
+            try:
+                self.cursor.execute(q1,tuple(r_id))
+                self.db.commit()
+                print("Recipe succesfully deleted")
+            except:
+                print("Failed to delete recipe")
+            
+        else:
+            q2 = "DELETE FROM recipe WHERE r_name = %s"
+            try:
+                self.cursor.execute(q2,(r_name,))
+                self.db.commit()
+                print("Recipe succesfully deleted")
+            except:
+                print("Failed to delete recipe")
     
 
-#     for customer in db.get_customer_base():
-#         print(*customer)
+    def get_recipes(self):
+        select_stmt = """SELECT * FROM recipe"""
+        try:
+            self.cursor.execute(select_stmt)
+            return self.cursor.fetchall()
+        except:
+            print("Failed to retrieve recipes from database.")
+        return []
+    
+    def get_recipe_id(self, r_name):
+        select_stmt = """SELECT r_id FROM recipe
+                         WHERE r_name = %s"""
+        print (r_name.lower())
+        recipe_data = (r_name.lower(),)
 
+        try:
+            self.cursor.execute(select_stmt, recipe_data)
+            data_retrived = self.cursor.fetchone()
+            if (len(data_retrived) == 1):
+                return data_retrived[0]
+        except:
+            print("Failed to retrieve recipe item.")
+            return -1 
+    
+    def get_cart_info(self, r_id):
+        select_stmt = """SELECT r_id, r_name, r_price
+                         FROM recipe WHERE r_id = %s"""
+        recipe_data = (r_id,)
+        try:
+            self.cursor.execute(select_stmt, recipe_data)
+            data_retrieved = self.cursor.fetchall()
+            if (len(data_retrieved) == 1):
+                return data_retrieved[0]
+        except:
+            print("Failed to get cart info from db.")
+
+    
