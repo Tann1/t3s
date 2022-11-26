@@ -15,7 +15,16 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
+
 private:
     Ui::MainWindow *ui;
+
+    void define_interaction_handlers();
+
+private slots:
+    void handle_login();
+    void handle_signup();
+    void handle_customer_creation();
 };
 #endif // MAINWINDOW_H
