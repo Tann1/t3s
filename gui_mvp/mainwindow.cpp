@@ -17,12 +17,14 @@ MainWindow::MainWindow(QWidget *parent)
     define_interaction_handlers();
 
     menu = new Menu();
+    cart = new Cart();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
     delete menu;
+    delete cart;
 }
 
 void MainWindow::define_interaction_handlers()
@@ -32,6 +34,9 @@ void MainWindow::define_interaction_handlers()
     connect(ui->btn_confirm_signup, &QPushButton::clicked, this, &MainWindow::handle_customer_creation);
     connect(ui->prev_recipe_btn, &QPushButton::clicked, this, &MainWindow::handle_prev_recipe);
     connect(ui->next_recipe_btn, &QPushButton::clicked, this, &MainWindow::handle_next_recipe);
+    connect(ui->add_to_cart_btn, &QPushButton::clicked, this, &MainWindow::handle_add_to_cart);
+    connect(ui->shoppingcart_btn, &QPushButton::clicked, this, &MainWindow::handle_shopping_cart_press);
+     connect(ui->cart_to_home_btn, &QPushButton::clicked, this, &MainWindow::handle_home_press);
 }
 
 void MainWindow::handle_login()
@@ -86,4 +91,37 @@ void MainWindow::handle_prev_recipe()
 {
     menu_item_t menu_item = menu->get_prev_menu_item();
     update_recipe_menu(menu_item);
+}
+
+void MainWindow::handle_add_to_cart()
+{
+
+    menu_item_t menu_item = menu->get_curr_menu_item();
+    cart->add_to_cart(menu_item);
+
+}
+
+void MainWindow::handle_shopping_cart_press()
+{
+    populate_cart_table();
+    ui->stackedWidget->setCurrentWidget(ui->checkout);
+}
+
+void MainWindow::handle_home_press()
+{
+    ui->stackedWidget->setCurrentWidget(ui->home);
+}
+
+void MainWindow::populate_cart_table()
+{
+    QList<menu_item_t> *cart_items = cart->get_cart_items();
+    ui->cart_table->setRowCount(cart_items->length());
+    menu_item_t curr_item;
+
+    for (int i = 0; i < cart_items->length(); ++i) {
+        curr_item = cart_items->value(i);
+        ui->cart_table->setItem(i, 0, new QTableWidgetItem(QString(curr_item.title)));
+        ui->cart_table->setItem(i, 1, new QTableWidgetItem(QString(curr_item.price)));
+    }
+    delete cart_items;
 }

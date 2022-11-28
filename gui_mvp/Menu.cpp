@@ -17,6 +17,7 @@ Menu::Menu()
     this->menu_items = new QList<menu_item_t>();
 
     if (this->recipe_file->open(QIODevice::ReadOnly)) {
+        out << "File open success\n";
         while (!this->recipe_file->atEnd()) {
             read_line = this->recipe_file->readLine();
             menu_fields = read_line.split('|');
@@ -72,7 +73,7 @@ menu_item_t Menu::get_next_menu_item() {
 
 menu_item_t Menu::get_prev_menu_item() {
     this->curr_menu--;
-    if (this->curr_menu <= 0)
+    if (this->curr_menu < 0)
         this->curr_menu = this->menu_items->length() - 1;
     return this->menu_items->value(curr_menu);
 }

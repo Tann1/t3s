@@ -10,11 +10,13 @@ CONFIG += c++11
 
 SOURCES += \
     Menu.cpp \
+    cart.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     Menu.h \
+    cart.h \
     mainwindow.h
 
 FORMS += \

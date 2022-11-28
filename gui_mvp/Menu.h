@@ -30,7 +30,7 @@ private:
     QFile *recipe_file;
     QList<menu_item_t> *menu_items;
     QString file_path;
-    int curr_menu;
+    qsizetype curr_menu;
 };
 
 
