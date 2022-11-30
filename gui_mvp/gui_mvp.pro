@@ -28,4 +28,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    recipes.txt
+    recipes.txt \
+    to_do.txt \
+    user_logins.txt \

@@ -1,0 +1,7 @@
+1) Admin Page consists of three things: Update menu, Add Recipe, View Customer
+
+2) Updatemenu frame is created. Read from recipes.txt -> update the menu_frame
+
+3) Add Recipe frame is created. Write to recipes.txt
+
+4) View Customer frame is created. Read from user_logins.txt

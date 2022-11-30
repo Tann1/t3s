@@ -37,5 +37,9 @@ private slots:
     void handle_add_to_cart();
     void handle_shopping_cart_press();
     void handle_home_press();
+    void handle_update_menu_press();
+    void admin_page();
+    void handle_add_recipe_press();
+    void handle_view_customers_press();
 };
 #endif // MAINWINDOW_H

@@ -6,6 +6,11 @@
 
 #define STR_EQUAL 0
 
+QTextStream out{stdout};
+QFileInfo fileinfo {QString("user_loginx.txt")};
+QByteArray read_line;
+QList<QByteArray> user_fields;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -36,7 +41,17 @@ void MainWindow::define_interaction_handlers()
     connect(ui->next_recipe_btn, &QPushButton::clicked, this, &MainWindow::handle_next_recipe);
     connect(ui->add_to_cart_btn, &QPushButton::clicked, this, &MainWindow::handle_add_to_cart);
     connect(ui->shoppingcart_btn, &QPushButton::clicked, this, &MainWindow::handle_shopping_cart_press);
-     connect(ui->cart_to_home_btn, &QPushButton::clicked, this, &MainWindow::handle_home_press);
+    connect(ui->cart_to_home_btn, &QPushButton::clicked, this, &MainWindow::handle_home_press);
+
+    //admin page
+    connect(ui->update_menu_btn, &QPushButton::clicked, this, &MainWindow::handle_update_menu_press);
+    connect(ui->admin_page_back_btn, &QPushButton::clicked, this, &MainWindow::admin_page);
+    connect(ui->admin_page_back_btn_2, &QPushButton::clicked, this, &MainWindow::admin_page);
+    connect(ui->admin_page_back_btn_3, &QPushButton::clicked, this, &MainWindow::admin_page);
+    connect(ui->add_recipe_btn,&QPushButton::clicked, this, &MainWindow::handle_add_recipe_press);
+    connect(ui->view_customers_btn,&QPushButton::clicked, this, &MainWindow::handle_view_customers_press);
+
+
 }
 
 void MainWindow::handle_login()
@@ -46,12 +61,14 @@ void MainWindow::handle_login()
 
     bool root_login = QString::compare(username, QString("root")) == STR_EQUAL && QString::compare(password, QString("root")) == STR_EQUAL;
 
+
     if (root_login) {
         menu_item_t menu_item = menu->get_curr_menu_item();
         update_recipe_menu(menu_item);
-        ui->stackedWidget->setCurrentWidget(ui->home);
+        ui->stackedWidget->setCurrentWidget(ui->admin);
 
     }
+
 }
 
 void MainWindow::handle_signup()
@@ -76,6 +93,8 @@ void MainWindow::handle_customer_creation()
 
     bool input_there = username.size() != 0 && email.size() != 0 && password.size() != 0 && password_cpy.size() != 0 && password_cpy.size() != 0 && address.size() != 0;
     bool passwords_match = QString::compare(password, password_cpy, Qt::CaseSensitive) == STR_EQUAL;
+
+       //open file then store
 
     if (input_there && passwords_match)
         ui->stackedWidget->setCurrentWidget(ui->login);
@@ -125,3 +144,24 @@ void MainWindow::populate_cart_table()
     }
     delete cart_items;
 }
+
+void MainWindow::handle_update_menu_press()
+{
+    ui->stackedWidget->setCurrentWidget(ui->update_menu);
+}
+
+void MainWindow::admin_page()
+{
+    ui->stackedWidget->setCurrentWidget(ui->admin);
+}
+
+void MainWindow::handle_add_recipe_press()
+{
+    ui->stackedWidget->setCurrentWidget(ui->add_recipe);
+}
+
+void MainWindow::handle_view_customers_press()
+{
+    ui->stackedWidget->setCurrentWidget(ui->view_customers);
+}
+
