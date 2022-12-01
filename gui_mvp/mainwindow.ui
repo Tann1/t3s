@@ -14,11 +14,11 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_5">
+   <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="login">
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -44,6 +44,7 @@
            <font>
             <family>Yu Gothic UI Semilight</family>
             <pointsize>32</pointsize>
+            <weight>75</weight>
             <bold>true</bold>
             <strikeout>false</strikeout>
            </font>
@@ -174,70 +175,140 @@
        </layout>
       </widget>
       <widget class="QWidget" name="admin">
-       <widget class="QFrame" name="frame">
-        <property name="geometry">
-         <rect>
-          <x>140</x>
-          <y>130</y>
-          <width>461</width>
-          <height>181</height>
-         </rect>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-        <widget class="QWidget" name="layoutWidget">
-         <property name="geometry">
-          <rect>
-           <x>150</x>
-           <y>40</y>
-           <width>181</width>
-           <height>83</height>
-          </rect>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_10">
-          <item row="2" column="0">
-           <widget class="QPushButton" name="add_recipe_btn">
-            <property name="font">
-             <font>
-              <pointsize>8</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Add Recipe</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QPushButton" name="update_menu_btn">
-            <property name="font">
-             <font>
-              <pointsize>8</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Update Menu</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QPushButton" name="view_customers_btn">
-            <property name="font">
-             <font>
-              <pointsize>8</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>View Customers</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QFrame" name="frame">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <item>
+            <spacer name="verticalSpacer_9">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>150</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="gridLayout_10">
+             <property name="verticalSpacing">
+              <number>15</number>
+             </property>
+             <item row="4" column="1">
+              <widget class="QPushButton" name="admin_logout">
+               <property name="text">
+                <string>logout</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QPushButton" name="update_menu_btn">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>200</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>200</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>8</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Update Menu</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QPushButton" name="view_customers_btn">
+               <property name="font">
+                <font>
+                 <pointsize>8</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>View Customers</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QPushButton" name="add_recipe_btn">
+               <property name="font">
+                <font>
+                 <pointsize>8</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Add Recipe</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <spacer name="horizontalSpacer_9">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="3" column="0">
+              <spacer name="horizontalSpacer_8">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_8">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>50</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="update_menu">
        <widget class="QFrame" name="update_menu_frame">
@@ -274,6 +345,7 @@
           <font>
            <family>Segoe UI</family>
            <pointsize>10</pointsize>
+           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -307,6 +379,7 @@
           <font>
            <family>Segoe UI</family>
            <pointsize>10</pointsize>
+           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -474,6 +547,7 @@
           <font>
            <family>Segoe UI</family>
            <pointsize>10</pointsize>
+           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -608,6 +682,35 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
+          <item row="1" column="0">
+           <widget class="QLineEdit" name="Textbox_Recipename">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Ofelia Display</family>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">
+font: 10pt &quot;Ofelia Display&quot;;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="placeholderText">
+             <string>Recipe Name</string>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="1">
            <widget class="QPushButton" name="open_btn">
             <property name="minimumSize">
@@ -620,6 +723,7 @@
              <font>
               <family>Segoe UI</family>
               <pointsize>10</pointsize>
+              <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
              </font>
@@ -635,36 +739,8 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QLineEdit" name="Textbox_Recipename">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Ofelia Display</family>
-              <pointsize>10</pointsize>
-              <italic>false</italic>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(33, 37, 43);
-font: 10pt &quot;Ofelia Display&quot;;</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="placeholderText">
-             <string>Recipe Name</string>
-            </property>
-           </widget>
-          </item>
           <item row="4" column="0">
-           <widget class="QLineEdit" name="Textbox_Ethnictype">
+           <widget class="QLineEdit" name="Textbox_Nutrition">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -675,19 +751,20 @@ font: 10pt &quot;Ofelia Display&quot;;</string>
              <font>
               <family>Ofelia Display</family>
               <pointsize>10</pointsize>
+              <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-color: rgb(33, 37, 43);
+             <string notr="true">
 font: 10pt &quot;Ofelia Display&quot;;</string>
             </property>
             <property name="text">
              <string/>
             </property>
             <property name="placeholderText">
-             <string>Ethnic Type</string>
+             <string>Nutrition Info</string>
             </property>
            </widget>
           </item>
@@ -703,12 +780,13 @@ font: 10pt &quot;Ofelia Display&quot;;</string>
              <font>
               <family>Ofelia Display</family>
               <pointsize>10</pointsize>
+              <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-color: rgb(33, 37, 43);
+             <string notr="true">
 font: 10pt &quot;Ofelia Display&quot;;</string>
             </property>
             <property name="text">
@@ -731,12 +809,13 @@ font: 10pt &quot;Ofelia Display&quot;;</string>
              <font>
               <family>Ofelia Display</family>
               <pointsize>10</pointsize>
+              <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-color: rgb(33, 37, 43);
+             <string notr="true">
 font: 10pt &quot;Ofelia Display&quot;;</string>
             </property>
             <property name="text">
@@ -747,35 +826,7 @@ font: 10pt &quot;Ofelia Display&quot;;</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QLineEdit" name="Textbox_Nutrition">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Ofelia Display</family>
-              <pointsize>10</pointsize>
-              <italic>false</italic>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(33, 37, 43);
-font: 10pt &quot;Ofelia Display&quot;;</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="placeholderText">
-             <string>Nutrition Info</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
+          <item row="8" column="0">
            <widget class="QLineEdit" name="Textbox_Setprice">
             <property name="minimumSize">
              <size>
@@ -787,12 +838,13 @@ font: 10pt &quot;Ofelia Display&quot;;</string>
              <font>
               <family>Ofelia Display</family>
               <pointsize>10</pointsize>
+              <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-color: rgb(33, 37, 43);
+             <string notr="true">
 font: 10pt &quot;Ofelia Display&quot;;</string>
             </property>
             <property name="text">
@@ -800,6 +852,35 @@ font: 10pt &quot;Ofelia Display&quot;;</string>
             </property>
             <property name="placeholderText">
              <string>Set Price</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLineEdit" name="Textbox_Ethnictype">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Ofelia Display</family>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">
+font: 10pt &quot;Ofelia Display&quot;;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="placeholderText">
+             <string>Ethnic Type</string>
             </property>
            </widget>
           </item>
@@ -824,6 +905,7 @@ font: 10pt &quot;Ofelia Display&quot;;</string>
           <font>
            <family>Segoe UI</family>
            <pointsize>10</pointsize>
+           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -832,8 +914,7 @@ font: 10pt &quot;Ofelia Display&quot;;</string>
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">
-</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Upload</string>
@@ -875,6 +956,7 @@ font: 10pt &quot;Ofelia Display&quot;;</string>
          <font>
           <family>Segoe UI</family>
           <pointsize>10</pointsize>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -911,6 +993,7 @@ font: 10pt &quot;Ofelia Display&quot;;</string>
            <font>
             <family>Yu Gothic UI Semilight</family>
             <pointsize>32</pointsize>
+            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -1216,6 +1299,13 @@ font: 10pt &quot;Ofelia Display&quot;;</string>
            <widget class="QPushButton" name="shoppingcart_btn">
             <property name="text">
              <string>Shopping Cart</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="customer_logout">
+            <property name="text">
+             <string>logout</string>
             </property>
            </widget>
           </item>

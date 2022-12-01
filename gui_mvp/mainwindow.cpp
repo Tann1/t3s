@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     menu = new Menu();
     cart = new Cart();
+    customer = new Customer();
 }
 
 MainWindow::~MainWindow()
@@ -30,6 +31,7 @@ MainWindow::~MainWindow()
     delete ui;
     delete menu;
     delete cart;
+    delete customer;
 }
 
 void MainWindow::define_interaction_handlers()
@@ -42,6 +44,7 @@ void MainWindow::define_interaction_handlers()
     connect(ui->add_to_cart_btn, &QPushButton::clicked, this, &MainWindow::handle_add_to_cart);
     connect(ui->shoppingcart_btn, &QPushButton::clicked, this, &MainWindow::handle_shopping_cart_press);
     connect(ui->cart_to_home_btn, &QPushButton::clicked, this, &MainWindow::handle_home_press);
+    connect(ui->customer_logout, &QPushButton::clicked, this, &MainWindow::handle_logout);
 
     //admin page
     connect(ui->update_menu_btn, &QPushButton::clicked, this, &MainWindow::handle_update_menu_press);
@@ -50,8 +53,7 @@ void MainWindow::define_interaction_handlers()
     connect(ui->admin_page_back_btn_3, &QPushButton::clicked, this, &MainWindow::admin_page);
     connect(ui->add_recipe_btn,&QPushButton::clicked, this, &MainWindow::handle_add_recipe_press);
     connect(ui->view_customers_btn,&QPushButton::clicked, this, &MainWindow::handle_view_customers_press);
-
-
+    connect(ui->admin_logout, &QPushButton::clicked, this, &MainWindow::handle_logout);
 }
 
 void MainWindow::handle_login()
@@ -63,10 +65,13 @@ void MainWindow::handle_login()
 
 
     if (root_login) {
+
+        ui->stackedWidget->setCurrentWidget(ui->admin);
+    }
+    if (customer->login_authenticate(username, password)) {
         menu_item_t menu_item = menu->get_curr_menu_item();
         update_recipe_menu(menu_item);
-        ui->stackedWidget->setCurrentWidget(ui->admin);
-
+        ui->stackedWidget->setCurrentWidget((ui->home));
     }
 
 }
@@ -85,19 +90,24 @@ void MainWindow::update_recipe_menu(menu_item_t menu_item) {
 
 void MainWindow::handle_customer_creation()
 {
-    QString username = ui->input_signup_username->text();
-    QString email = ui->input_signup_email->text();
-    QString password = ui->input_signup_password->text();
-    QString password_cpy = ui->input_signup_password_cpy->text();
-    QString address = ui->input_signup_address->text();
+    QByteArray username = ui->input_signup_username->text().toUtf8();
+    QByteArray email = ui->input_signup_email->text().toUtf8();
+    QByteArray password = ui->input_signup_password->text().toUtf8();
+    QByteArray password_cpy = ui->input_signup_password_cpy->text().toUtf8();
+    QByteArray address = ui->input_signup_address->text().toUtf8();
 
-    bool input_there = username.size() != 0 && email.size() != 0 && password.size() != 0 && password_cpy.size() != 0 && password_cpy.size() != 0 && address.size() != 0;
-    bool passwords_match = QString::compare(password, password_cpy, Qt::CaseSensitive) == STR_EQUAL;
+    customer_s new_customer;
+    new_customer.username = username;
+    new_customer.email = email;
+    new_customer.password = password;
+    new_customer.address = address;
 
        //open file then store
 
-    if (input_there && passwords_match)
+    if (customer->validate_new_customer(new_customer, password_cpy)) {
+        customer->add_customers(new_customer);
         ui->stackedWidget->setCurrentWidget(ui->login);
+    }
 }
 
 void MainWindow::handle_next_recipe()
@@ -164,4 +174,15 @@ void MainWindow::handle_view_customers_press()
 {
     ui->stackedWidget->setCurrentWidget(ui->view_customers);
 }
+
+void MainWindow::handle_logout()
+{
+    while(ui->cart_table->rowCount() > 0)
+        ui->cart_table->removeRow(0);
+    ui->input_password->setText(QString(""));
+    ui->input_username->setText(QString(""));
+    ui->stackedWidget->setCurrentWidget(ui->login);
+}
+
+
 

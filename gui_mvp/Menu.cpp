@@ -17,7 +17,7 @@ Menu::Menu()
     this->menu_items = new QList<menu_item_t>();
 
     if (this->recipe_file->open(QIODevice::ReadOnly)) {
-        out << "File open success\n";
+        out << "Recipe file open success\n";
         while (!this->recipe_file->atEnd()) {
             read_line = this->recipe_file->readLine();
             menu_fields = read_line.split('|');

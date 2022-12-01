@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "Menu.h"
 #include "cart.h"
+#include "customer.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,8 +22,11 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
     Menu *menu;
     Cart *cart;
+    Customer *customer;
+
 
     void define_interaction_handlers();
     void update_recipe_menu(menu_item_t menu_item);
@@ -41,5 +45,7 @@ private slots:
     void admin_page();
     void handle_add_recipe_press();
     void handle_view_customers_press();
+    void handle_logout();
+
 };
 #endif // MAINWINDOW_H
