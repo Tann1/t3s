@@ -46,6 +46,7 @@ private slots:
     void handle_add_recipe_press();
     void handle_view_customers_press();
     void handle_logout();
+    void handle_upload_recipe();
 
 };
 #endif // MAINWINDOW_H

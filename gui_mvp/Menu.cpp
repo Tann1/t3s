@@ -55,9 +55,11 @@ void Menu::add_menu_to_file(menu_item_t item)
     data.append(item.price);
 
     if (this->recipe_file->open(QIODevice::Append)) {
+        add_menu(item);
         out << data << "\n";
+        this->recipe_file->close();
     }
-    this->recipe_file->close();
+
 }
 
 menu_item_t Menu::get_curr_menu_item() {

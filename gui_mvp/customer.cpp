@@ -106,3 +106,7 @@ customer_s* Customer::find_user(QString username)
 
     return nullptr;
 }
+
+const QList<customer_s> *Customer::get_customers() {
+    return this->customers;
+}

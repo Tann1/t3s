@@ -47,13 +47,12 @@ void MainWindow::define_interaction_handlers()
     connect(ui->customer_logout, &QPushButton::clicked, this, &MainWindow::handle_logout);
 
     //admin page
-    connect(ui->update_menu_btn, &QPushButton::clicked, this, &MainWindow::handle_update_menu_press);
     connect(ui->admin_page_back_btn, &QPushButton::clicked, this, &MainWindow::admin_page);
-    connect(ui->admin_page_back_btn_2, &QPushButton::clicked, this, &MainWindow::admin_page);
     connect(ui->admin_page_back_btn_3, &QPushButton::clicked, this, &MainWindow::admin_page);
     connect(ui->add_recipe_btn,&QPushButton::clicked, this, &MainWindow::handle_add_recipe_press);
     connect(ui->view_customers_btn,&QPushButton::clicked, this, &MainWindow::handle_view_customers_press);
     connect(ui->admin_logout, &QPushButton::clicked, this, &MainWindow::handle_logout);
+    connect(ui->upload_recipe_btn, &QPushButton::clicked, this, &MainWindow::handle_upload_recipe);
 }
 
 void MainWindow::handle_login()
@@ -95,6 +94,12 @@ void MainWindow::handle_customer_creation()
     QByteArray password = ui->input_signup_password->text().toUtf8();
     QByteArray password_cpy = ui->input_signup_password_cpy->text().toUtf8();
     QByteArray address = ui->input_signup_address->text().toUtf8();
+
+    ui->input_signup_username->setText(QString(""));
+    ui->input_signup_email->setText(QString(""));
+    ui->input_signup_password->setText(QString(""));
+    ui->input_signup_password_cpy->setText(QString(""));
+    ui->input_signup_address->setText(QString(""));
 
     customer_s new_customer;
     new_customer.username = username;
@@ -155,10 +160,7 @@ void MainWindow::populate_cart_table()
     delete cart_items;
 }
 
-void MainWindow::handle_update_menu_press()
-{
-    ui->stackedWidget->setCurrentWidget(ui->update_menu);
-}
+
 
 void MainWindow::admin_page()
 {
@@ -170,8 +172,43 @@ void MainWindow::handle_add_recipe_press()
     ui->stackedWidget->setCurrentWidget(ui->add_recipe);
 }
 
+void MainWindow::handle_upload_recipe()
+{
+    QByteArray name = ui->Textbox_Recipename->text().toUtf8();
+    QByteArray description = ui->Textbox_RecipeDescription->text().toUtf8();
+    QByteArray nutrition = ui->Textbox_Nutrition->text().toUtf8();
+    QByteArray ethic_type = ui->Textbox_Ethnictype->text().toUtf8();
+    QString price = ui->Textbox_Setprice->text();
+
+    ui->Textbox_Upload->setText(QString(""));
+    ui->Textbox_Recipename->setText(QString(""));
+    ui->Textbox_RecipeDescription->setText(QString(""));
+    ui->Textbox_Nutrition->setText(QString(""));
+    ui->Textbox_Ethnictype->setText(QString(""));
+    ui->Textbox_Setprice->setText(QString(""));
+
+    menu_item_t item;
+    item.title = name;
+    item.description = description;
+    item.price = (QString("$").append(price)).toUtf8();
+
+    menu->add_menu_to_file(item);
+}
+
 void MainWindow::handle_view_customers_press()
 {
+    const QList<customer_s>* clients = customer->get_customers();
+    ui->customer_table->setRowCount(clients->length());
+    customer_s curr_customer;
+
+    for (int i = 0; i < clients->length(); ++i) {
+        curr_customer = clients->value(i);
+        ui->customer_table->setItem(i, 0, new QTableWidgetItem(QString(curr_customer.username.data())));
+        ui->customer_table->setItem(i, 1, new QTableWidgetItem(QString(curr_customer.email.data())));
+        ui->customer_table->setItem(i, 2, new QTableWidgetItem(QString(curr_customer.address.data())));
+    }
+
+
     ui->stackedWidget->setCurrentWidget(ui->view_customers);
 }
 

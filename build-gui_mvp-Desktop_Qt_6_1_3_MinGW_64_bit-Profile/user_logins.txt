@@ -2,3 +2,5 @@ ypark|ypark123@gmail.com|password|82674 Nicolas Street, Suite 819, 82647-4198, T
 eblake|eblake@example.com|password|3432 Marian Springs, Suite 710, 18390, Andresburgh, Ohio, United States
 rsimmons|rsimmons@example.com|password|272 Jarrod Plains, Apt. 380, 24936-7013, South Norris, Mississippi, United States
 tann|gadkaritanishq@gmail.com|pass|1234 street addr city, State 
+chris|chris.consul@sjsu.edu|root|1234 some address st. city, state
+garr|garr.someemail@gmail.com|root|1234 some address st. city, state
